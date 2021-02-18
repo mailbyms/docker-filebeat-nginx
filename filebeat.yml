@@ -1,0 +1,25 @@
+filebeat.inputs:
+- type: log
+  enabled: false
+# 下面的的xxx代表不同微服务产生的日志，具体以自己项目为准，如有多个微服务，按照如下格式继续添加即可
+  paths:
+    - /var/log/nginx/*.log
+
+filebeat.config.modules:
+  enabled: true
+  path: ${path.config}/modules.d/*.yml
+
+# 配置日志输出到哪里
+output.elasticsearch: 
+  hosts: ["192.168.0.25:9200"]  
+
+  # Protocol - either `http` (default) or `https`.
+  protocol: "https"
+  ssl.verification_mode: none
+
+  username: elastic
+  password: 123456
+
+#以下配置可以不配
+#setup.kibana:
+ #host: http://192.168.60.105:5601

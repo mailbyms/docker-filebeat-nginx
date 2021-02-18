@@ -1,0 +1,15 @@
+version: '2'
+services:
+  filebeat:
+    image: mailbyms/filebeat-nginx:7.10.2
+    volumes:
+      - /usr/local/nginx-1.18.0/logs:/var/log/nginx
+      - ./filebeat.yml:/usr/share/filebeat/filebeat.yml
+      - data_filebeat_nginx:/usr/share/filebeat/data
+    network_mode: "host"
+    environment:
+      - "TZ=Asia/Shanghai"
+
+volumes:
+  data_filebeat_nginx:
+    driver: local
